@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="700"></canvas>
+</body>
+<script>
+    canvas = document.querySelector("#canvas");
+    context = canvas.getContext('2d');
+    var PLANE = {
+        init:function () {
+            this.left = 200;
+            this.top = 300;
+            this.planeIcon ='./plane.png';
+            this.image = this.getImage();
+            this.planeSize = {
+                width:60,
+                height:100
+            };
+            this.bindEvent();
+            return this;
+        },
+        bindEvent:function () {
+            var self = this;
+            window.onkeydown = function (e) {
+                let key = e.keyCode || e.which || e.charCode;
+                switch (key){
+                    case 37:
+                        self.move = true;
+                        animate();
+                        self.left -= 5;
+                        break;
+                    //方向键右
+                    case 39:
+                        self.move = true;
+                        animate();
+                        self.left += 5;
+                        break;
+                    default:
+                        self.move = false;
+                }
+            }
+        },
+        draw:function () {
+            //console.log(this.image);
+            context.beginPath();
+            context.fillText("这是飞机",20,20);
+            context.
+            context.drawImage(this.image, this.left, this.top, this.planeSize.width, this.planeSize.height);
+        },
+        getImage: function () {
+            if (this.image) {
+                return this.image;
+            } else {
+                this.image = new Image();
+                this.image.src = this.planeIcon;
+                return this.image;
+            }
+        },
+    };
+    var plane = PLANE.init();
+    function animate(){
+        plane.draw();
+        if(plane.move){
+            requestAnimationFrame(animate);
+        }
+    }
+    plane.draw();
+
+</script>
+</html>
