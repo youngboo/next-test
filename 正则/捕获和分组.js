@@ -25,6 +25,7 @@ console.log(num);
  * @type {string}
  */
 var s = '<div id="babalala">paragraph </div><p>哈哈哈</p><span class="yellow">hello jsonp!</span><strong>呵呵呵pi!</strong>';
-var r = /<((?!p)).+?\/(\1)>/g; // 正则写在这里
-console.log(s.match(r));
+var r = /<((?!p)[a-z]*?).*?>.+?<\/(\1)>/g; // 正则写在这里
+var matchs = s.match(r);
+console.log(matchs);
 console.log(s.replace(r, '<$1p>'));
